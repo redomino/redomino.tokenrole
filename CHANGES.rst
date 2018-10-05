@@ -5,7 +5,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Quote url path when setting cookie
+  [instification]
 
 
 1.0 (2018-04-16)
