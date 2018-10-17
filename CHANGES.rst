@@ -6,6 +6,7 @@ Changelog
 ----------------
 
 - Quote url path when setting cookie
+- Fix email tests and travis tests
   [instification]
 
 
