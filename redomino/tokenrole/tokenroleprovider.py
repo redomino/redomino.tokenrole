@@ -15,6 +15,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 
+from apply import apply
 from borg.localrole.interfaces import ILocalRoleProvider
 from datetime import datetime
 from DateTime import DateTime
@@ -28,12 +29,11 @@ from zope.component import adapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
-try:
+try:  # pragma: no cover
     from plone.protect.utils import safeWrite
 except ImportError:  # pragma: no cover
     def safeWrite(context, request=None):
         return
-
 
 
 ANNOTATIONS_KEY = 'redomino.tokenrole.tokenrole_annotations'
@@ -121,7 +121,7 @@ class TokenRolesLocalRolesProviderAdapter(object):
             if expire_date.replace(tzinfo=None) > datetime.now():
                 if token not in request.cookies:
                     physical_path = self.context.getPhysicalPath()
-                    url_path = urllib.quote('/' + '/'.join(request.physicalPathToVirtualPath(physical_path)))
+                    url_path = urllib.parse.quote('/' + '/'.join(request.physicalPathToVirtualPath(physical_path)))
                     response.setCookie(name='token',
                                        value=token,
                                        expires=DateTime(expire_date).toZone('GMT').rfc822(),
